@@ -19,7 +19,17 @@ namespace GeolocationTCP
         {
             this.Closing += MainWindow_Closing;
             InitializeComponent();
-
+            groupBox1.Text = Resources.Strings.groupBox1_Text;
+            groupBox2.Text = Resources.Strings.groupBox2_Text;
+            label1.Text = Resources.Strings.label1_Text;
+            label2.Text = Resources.Strings.label2_Text;
+            label5.Text = Resources.Strings.label5_Text;
+            label6.Text = Resources.Strings.label6_Text;
+            label8.Text = Resources.Strings.label8_Text;
+            label9.Text = Resources.Strings.label9_Text;
+            label10.Text = Resources.Strings.label10_Text;
+            label11.Text = Resources.Strings.label11_Text;
+            label15.Text = Resources.Strings.label15_Text;
             trayMenu = new ContextMenu();
             trayMenu.MenuItems.Add("Open", OnOpen);
             trayMenu.MenuItems.Add("Exit", OnExit);

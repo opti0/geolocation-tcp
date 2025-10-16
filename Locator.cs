@@ -75,6 +75,26 @@ namespace GeolocationTCP
                 //window.SetLocationLog(e.ToString());
             }
         }
+        private string GetLocalizedSource(PositionSource source)
+        {
+            switch (source)
+            {
+                case PositionSource.Cellular:
+                    return Resources.Strings.Source_Cellular;      // "Sieć komórkowa"
+                case PositionSource.Satellite:
+                    return Resources.Strings.Source_Satellite;     // "Satelita (GNSS)"
+                case PositionSource.WiFi:
+                    return Resources.Strings.Source_WiFi;          // "Wi-Fi"
+                case PositionSource.IPAddress:
+                    return Resources.Strings.Source_IPAddress;     // "Adres IP"
+                case PositionSource.Default:
+                    return Resources.Strings.Source_Default;       // "Domyślne"
+                case PositionSource.Obfuscated:
+                    return Resources.Strings.Source_Obfuscated;    // "Zanonimizowane"
+                default:
+                    return Resources.Strings.Source_Unknown;       // "Nieznane źródło"
+            }
+        }
 
         public void UpdateUI(DateTimeOffset datetime, string nmea, double lat, double lon, 
             string speed, string accuracy, PositionSource source)
@@ -97,11 +117,29 @@ namespace GeolocationTCP
             window.SetDatetime(datetime.ToString());
             window.SetAccuracy(accuracy+"m");
 
-            window.SetSource(source.ToString());
+            window.SetSource(GetLocalizedSource(source));
             //}
             //catch (Exception ex) {
             //    throw ex;
             //}
+        }
+        private string GetLocalizedStatus(PositionStatus status)
+        {
+            switch (status)
+            {
+                case PositionStatus.Ready:
+                    return Resources.Strings.Status_Ready;          // np. "Gotowy"
+                case PositionStatus.Initializing:
+                    return Resources.Strings.Status_Initializing;    // np. "Inicjalizowanie..."
+                case PositionStatus.NoData:
+                    return Resources.Strings.Status_NoData;          // np. "Brak danych"
+                case PositionStatus.Disabled:
+                    return Resources.Strings.Status_Disabled;        // np. "Wyłączony"
+                case PositionStatus.NotInitialized:
+                    return Resources.Strings.Status_NotInitialized;  // np. "Nie zainicjalizowany"
+                default:
+                    return Resources.Strings.Status_Unknown;         // np. "Nieznany stan"
+            }
         }
 
         public void StartTracking()
@@ -157,7 +195,7 @@ namespace GeolocationTCP
                     PositionStatus status = e.Status;
                     try
                     {
-                        window.SetStatus(status.ToString());
+                        window.SetStatus(GetLocalizedStatus(status));
                     }
                     catch (Exception ex)
                     {

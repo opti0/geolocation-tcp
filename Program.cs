@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Globalization;
 using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using TcpLib;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
-using TcpLib;
 
 namespace GeolocationTCP
 {
@@ -17,8 +19,10 @@ namespace GeolocationTCP
         [STAThread]
         static void Main()
         {
-            
 
+            CultureInfo systemCulture = CultureInfo.CurrentUICulture;
+            Thread.CurrentThread.CurrentCulture = systemCulture;
+            Thread.CurrentThread.CurrentUICulture = systemCulture;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             MainWindow w = new MainWindow();
