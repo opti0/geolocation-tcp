@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GeolocationTCP
@@ -17,8 +11,9 @@ namespace GeolocationTCP
 
         public MainWindow()
         {
-            this.Closing += MainWindow_Closing;
             InitializeComponent();
+
+            // Ustawienia tłumaczeń
             groupBox1.Text = Resources.Strings.groupBox1_Text;
             groupBox2.Text = Resources.Strings.groupBox2_Text;
             label1.Text = Resources.Strings.label1_Text;
@@ -30,9 +25,12 @@ namespace GeolocationTCP
             label10.Text = Resources.Strings.label10_Text;
             label11.Text = Resources.Strings.label11_Text;
             label15.Text = Resources.Strings.label15_Text;
+
+            // Ikona w zasobniku
             trayMenu = new ContextMenu();
-            trayMenu.MenuItems.Add("Open", OnOpen);
-            trayMenu.MenuItems.Add("Exit", OnExit);
+            trayMenu.MenuItems.Add(Resources.Strings.Tray_Open, OnOpen);
+            trayMenu.MenuItems.Add(Resources.Strings.Tray_Exit, OnExit);
+
             trayIcon = new NotifyIcon();
             trayIcon.Text = "Geolocation TCP";
             trayIcon.Icon = new Icon(GetType(), "location.ico");
@@ -43,33 +41,56 @@ namespace GeolocationTCP
 
         protected override void OnLoad(EventArgs e)
         {
-            Visible = true; // Hide form window.
-            ShowInTaskbar = true; // Remove from taskbar.
-
             base.OnLoad(e);
+            Visible = true;
+            ShowInTaskbar = true;
         }
 
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+            if (WindowState == FormWindowState.Minimized)
+            {
+                this.Hide();
+                ShowInTaskbar = false;
+                trayIcon.BalloonTipTitle = "Geolocation TCP";
+                trayIcon.BalloonTipText = "Aplikacja działa w tle.";
+                trayIcon.ShowBalloonTip(2000);
+            }
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            trayIcon.Visible = false; // usuń ikonę z traya przy zamknięciu
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-               trayIcon.Dispose();
+                trayIcon.Dispose();
             }
             base.Dispose(disposing);
-            
+        }
+
+        // ---- Obsługa ikony traya ----
+
+        private void OnOpen(object sender, EventArgs e)
+        {
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
+            this.ShowInTaskbar = true;
         }
 
         private void OnExit(object sender, EventArgs e)
         {
+            trayIcon.Visible = false;
             Application.Exit();
         }
 
-        private void OnTrayIconClick(Object sender, EventArgs args)
+        private void OnTrayIconClick(object sender, EventArgs e)
         {
             if (this.Visible)
             {
@@ -79,41 +100,12 @@ namespace GeolocationTCP
             else
             {
                 this.Show();
-                ShowInTaskbar = true;
+                this.WindowState = FormWindowState.Normal;
+                this.ShowInTaskbar = true;
             }
         }
 
-        private void OnOpen(Object sender, EventArgs args)
-        {
-            this.Show();
-        }
-
-        void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            // Prevent window from closing
-            e.Cancel = true;
-            this.Hide();
-        }
-
-        private void MainWindow_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
+        // ---- Metody pomocnicze UI ----
 
         internal void SetLocationLog(String text)
         {
@@ -148,11 +140,10 @@ namespace GeolocationTCP
 
             SetLat(latitude);
             SetLon(longitude);
-
         }
+
         internal void SetLat(String text)
         {
-            
             if (this.labelLat.InvokeRequired)
             {
                 SetTextCallback d = new SetTextCallback(SetLat);
@@ -229,7 +220,6 @@ namespace GeolocationTCP
             }
         }
 
-
         internal void SetAccuracy(string text)
         {
             if (this.labelAccuracy.InvokeRequired)
@@ -241,11 +231,6 @@ namespace GeolocationTCP
             {
                 this.labelAccuracy.Text = text;
             }
-        }
-
-        private void label12_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

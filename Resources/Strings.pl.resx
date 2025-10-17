@@ -189,4 +189,10 @@
   <data name="Status_Unknown" xml:space="preserve">
     <value>Nieznany</value>
   </data>
+  <data name="Tray_Exit" xml:space="preserve">
+    <value>Zakończ</value>
+  </data>
+  <data name="Tray_Open" xml:space="preserve">
+    <value>Przywróć</value>
+  </data>
 </root>
