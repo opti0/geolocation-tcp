@@ -61,6 +61,15 @@ namespace GeolocationTCP.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu The application is running in the background..
+        /// </summary>
+        internal static string AppRunsInBackground {
+            get {
+                return ResourceManager.GetString("AppRunsInBackground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Network settings.
         /// </summary>
         internal static string groupBox1_Text {

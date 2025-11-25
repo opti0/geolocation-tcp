@@ -80,19 +80,19 @@ namespace GeolocationTCP
             switch (source)
             {
                 case PositionSource.Cellular:
-                    return Resources.Strings.Source_Cellular;      // "Sieć komórkowa"
+                    return Resources.Strings.Source_Cellular;      // "Cell network"
                 case PositionSource.Satellite:
-                    return Resources.Strings.Source_Satellite;     // "Satelita (GNSS)"
+                    return Resources.Strings.Source_Satellite;     // "Satelite (GNSS)"
                 case PositionSource.WiFi:
                     return Resources.Strings.Source_WiFi;          // "Wi-Fi"
                 case PositionSource.IPAddress:
-                    return Resources.Strings.Source_IPAddress;     // "Adres IP"
+                    return Resources.Strings.Source_IPAddress;     // "IP Adress"
                 case PositionSource.Default:
-                    return Resources.Strings.Source_Default;       // "Domyślne"
+                    return Resources.Strings.Source_Default;       // "Default"
                 case PositionSource.Obfuscated:
-                    return Resources.Strings.Source_Obfuscated;    // "Zanonimizowane"
+                    return Resources.Strings.Source_Obfuscated;    // "Anonymous"
                 default:
-                    return Resources.Strings.Source_Unknown;       // "Nieznane źródło"
+                    return Resources.Strings.Source_Unknown;       // "Unknown"
             }
         }
 
@@ -128,17 +128,17 @@ namespace GeolocationTCP
             switch (status)
             {
                 case PositionStatus.Ready:
-                    return Resources.Strings.Status_Ready;          // np. "Gotowy"
+                    return Resources.Strings.Status_Ready;          
                 case PositionStatus.Initializing:
-                    return Resources.Strings.Status_Initializing;    // np. "Inicjalizowanie..."
+                    return Resources.Strings.Status_Initializing;    
                 case PositionStatus.NoData:
-                    return Resources.Strings.Status_NoData;          // np. "Brak danych"
+                    return Resources.Strings.Status_NoData;          
                 case PositionStatus.Disabled:
-                    return Resources.Strings.Status_Disabled;        // np. "Wyłączony"
+                    return Resources.Strings.Status_Disabled;        
                 case PositionStatus.NotInitialized:
-                    return Resources.Strings.Status_NotInitialized;  // np. "Nie zainicjalizowany"
+                    return Resources.Strings.Status_NotInitialized; 
                 default:
-                    return Resources.Strings.Status_Unknown;         // np. "Nieznany stan"
+                    return Resources.Strings.Status_Unknown;        
             }
         }
 

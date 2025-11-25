@@ -13,7 +13,7 @@ namespace GeolocationTCP
         {
             InitializeComponent();
 
-            // Ustawienia tłumaczeń
+            // Translations
             groupBox1.Text = Resources.Strings.groupBox1_Text;
             groupBox2.Text = Resources.Strings.groupBox2_Text;
             label1.Text = Resources.Strings.label1_Text;
@@ -26,7 +26,7 @@ namespace GeolocationTCP
             label11.Text = Resources.Strings.label11_Text;
             label15.Text = Resources.Strings.label15_Text;
 
-            // Ikona w zasobniku
+            // IkTray icon
             trayMenu = new ContextMenu();
             trayMenu.MenuItems.Add(Resources.Strings.Tray_Open, OnOpen);
             trayMenu.MenuItems.Add(Resources.Strings.Tray_Exit, OnExit);
@@ -55,7 +55,7 @@ namespace GeolocationTCP
                 this.Hide();
                 ShowInTaskbar = false;
                 trayIcon.BalloonTipTitle = "Geolocation TCP";
-                trayIcon.BalloonTipText = "Aplikacja działa w tle.";
+                trayIcon.BalloonTipText = Resources.Strings.AppRunsInBackground;
                 trayIcon.ShowBalloonTip(2000);
             }
         }
@@ -63,7 +63,7 @@ namespace GeolocationTCP
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
-            trayIcon.Visible = false; // usuń ikonę z traya przy zamknięciu
+            trayIcon.Visible = false; //delete tray icon on close
         }
 
         protected override void Dispose(bool disposing)
@@ -75,7 +75,7 @@ namespace GeolocationTCP
             base.Dispose(disposing);
         }
 
-        // ---- Obsługa ikony traya ----
+        // Tray icon settings
 
         private void OnOpen(object sender, EventArgs e)
         {
@@ -105,7 +105,6 @@ namespace GeolocationTCP
             }
         }
 
-        // ---- Metody pomocnicze UI ----
 
         internal void SetLocationLog(String text)
         {
